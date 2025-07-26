@@ -1,6 +1,7 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
 import css from "./SearchBar.module.css";
+import { useTranslation } from "react-i18next";
 
 interface SearchBarProps {
   onSubmit: (query: string) => void;
@@ -8,6 +9,7 @@ interface SearchBarProps {
 
 export default function SearchBar({ onSubmit }: SearchBarProps) {
   const [input, setInput] = useState("");
+  const { t } = useTranslation();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -33,11 +35,11 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             autoComplete="off"
-            placeholder="Search movies..."
+            placeholder={t("searchPlaceholder")}
             autoFocus
           />
           <button className={css.button} type="submit">
-            Search
+            {t("searchButton")}
           </button>
         </form>
       </div>

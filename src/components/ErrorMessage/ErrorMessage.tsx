@@ -1,5 +1,7 @@
 import css from "./ErrorMessage.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function ErrorMessage() {
-  return <p className={css.text}>There was an error, please try again...</p>;
+  const { t } = useTranslation();
+  return <p className={css.text}>{t("error")}</p>;
 }

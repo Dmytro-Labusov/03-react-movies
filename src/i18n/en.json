@@ -1,0 +1,10 @@
+{
+  "searchPlaceholder": "Search movies...",
+  "searchButton": "Search",
+  "loading": "Loading movies, please wait...",
+  "error": "There was an error, please try again...",
+  "noMovies": "No movies found for your request.",
+  "poweredBy": "Powered by TMDB",
+  "releaseDate": "Release Date",
+  "rating": "Rating"
+}

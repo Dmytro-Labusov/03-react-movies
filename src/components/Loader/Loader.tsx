@@ -1,5 +1,7 @@
 import css from "./Loader.module.css";
+import { useTranslation } from "react-i18next";
 
 export default function Loader() {
-  return <p className={css.text}>Loading movies, please wait...</p>;
+  const { t } = useTranslation();
+  return <p className={css.text}>{t("loading")}</p>;
 }

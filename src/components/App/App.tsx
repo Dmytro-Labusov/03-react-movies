@@ -7,9 +7,12 @@ import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import MovieModal from "../MovieModal/MovieModal";
 import toast, { Toaster } from "react-hot-toast";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "../LanguageSwitcher/LanguageSwitcher";
 import css from "./App.module.css";
 
 export default function App() {
+  const { t } = useTranslation();
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -17,7 +20,7 @@ export default function App() {
 
   const handleSearch = async (query: string) => {
     if (!query.trim()) {
-      toast.error("Please enter your search query.");
+      toast.error(t("noQuery"));
       return;
     }
     setLoading(true);
@@ -26,11 +29,11 @@ export default function App() {
     try {
       const results = await fetchMovies(query);
       if (results.length === 0) {
-        toast("No movies found for your request.");
+        toast(t("noMovies"));
       }
       setMovies(results);
     } catch {
-      setError("There was an error, please try again...");
+      setError(t("error"));
     } finally {
       setLoading(false);
     }
@@ -39,6 +42,7 @@ export default function App() {
   return (
     <div className={css.app}>
       <Toaster position="top-right" />
+      <LanguageSwitcher />
       <SearchBar onSubmit={handleSearch} />
       {loading && <Loader />}
       {error && <ErrorMessage />}
