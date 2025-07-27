@@ -1,5 +1,6 @@
 import type { FormEvent } from "react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 import css from "./SearchBar.module.css";
 import { useTranslation } from "react-i18next";
 
@@ -11,9 +12,17 @@ export default function SearchBar({ onSubmit }: SearchBarProps) {
   const [input, setInput] = useState("");
   const { t } = useTranslation();
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(input);
+    const formData = new FormData(e.currentTarget);
+    const query = formData.get("query")?.toString().trim();
+
+    if (!query) {
+      toast.error(t("noQuery"));
+      return;
+    }
+
+    onSubmit(query);
   };
 
   return (

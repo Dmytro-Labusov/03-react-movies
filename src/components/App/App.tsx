@@ -19,10 +19,6 @@ export default function App() {
   const [selected, setSelected] = useState<Movie | null>(null);
 
   const handleSearch = async (query: string) => {
-    if (!query.trim()) {
-      toast.error(t("noQuery"));
-      return;
-    }
     setLoading(true);
     setError(null);
     setMovies([]);
