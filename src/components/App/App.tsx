@@ -39,7 +39,11 @@ export default function App() {
     <div className={css.app}>
       <Toaster position="top-right" />
       <LanguageSwitcher />
-      <SearchBar onSubmit={handleSearch} />
+      <SearchBar
+        action={(formData) =>
+          handleSearch(formData.get("query")?.toString() || "")
+        }
+      />
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {movies.length > 0 && !loading && !error && (
