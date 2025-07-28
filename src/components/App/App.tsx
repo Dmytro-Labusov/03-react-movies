@@ -39,13 +39,9 @@ export default function App() {
     <div className={css.app}>
       <Toaster position="top-right" />
       <LanguageSwitcher />
-      <SearchBar
-        action={(formData) =>
-          handleSearch(formData.get("query")?.toString() || "")
-        }
-      />
+      <SearchBar onSubmit={handleSearch} />
       {loading && <Loader />}
-      {error && <ErrorMessage />}
+      {error && <ErrorMessage message={error} />}
       {movies.length > 0 && !loading && !error && (
         <MovieGrid movies={movies} onSelect={setSelected} />
       )}
